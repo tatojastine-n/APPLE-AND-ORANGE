@@ -1,122 +1,84 @@
-#include <bits/stdc++.h>
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
+using System.Text;
+using System;
 
-using namespace std;
-
-string ltrim(const string &);
-string rtrim(const string &);
-vector<string> split(const string &);
-
-/*
- * Complete the 'countApplesAndOranges' function below.
- *
- * The function accepts following parameters:
- *  1. INTEGER s
- *  2. INTEGER t
- *  3. INTEGER a
- *  4. INTEGER b
- *  5. INTEGER_ARRAY apples
- *  6. INTEGER_ARRAY oranges
- */
-
-void countApplesAndOranges(int s, int t, int a, int b, vector<int> apples, vector<int> oranges) {
-
-}
-
-int main()
+class Result
 {
-    string first_multiple_input_temp;
-    getline(cin, first_multiple_input_temp);
 
-    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
+    /*
+     * Complete the 'countApplesAndOranges' function below.
+     *
+     * The function accepts following parameters:
+     *  1. INTEGER s
+     *  2. INTEGER t
+     *  3. INTEGER a
+     *  4. INTEGER b
+     *  5. INTEGER_ARRAY apples
+     *  6. INTEGER_ARRAY oranges
+     */
 
-    int s = stoi(first_multiple_input[0]);
-
-    int t = stoi(first_multiple_input[1]);
-
-    string second_multiple_input_temp;
-    getline(cin, second_multiple_input_temp);
-
-    vector<string> second_multiple_input = split(rtrim(second_multiple_input_temp));
-
-    int a = stoi(second_multiple_input[0]);
-
-    int b = stoi(second_multiple_input[1]);
-
-    string third_multiple_input_temp;
-    getline(cin, third_multiple_input_temp);
-
-    vector<string> third_multiple_input = split(rtrim(third_multiple_input_temp));
-
-    int m = stoi(third_multiple_input[0]);
-
-    int n = stoi(third_multiple_input[1]);
-
-    string apples_temp_temp;
-    getline(cin, apples_temp_temp);
-
-    vector<string> apples_temp = split(rtrim(apples_temp_temp));
-
-    vector<int> apples(m);
-
-    for (int i = 0; i < m; i++) {
-        int apples_item = stoi(apples_temp[i]);
-
-        apples[i] = apples_item;
+    public static void countApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
+    {
+        int appleCount = 0;
+        foreach (int d in apples)
+        {
+            int pos = a + d;
+            if (pos >= s && pos <= t)
+            {
+                appleCount++;
+            }
+        }
+        int orangeCount = 0;
+        foreach (int d in oranges)
+        {
+            int pos = b + d;
+            if (pos >= s && pos <= t)
+            {
+                orangeCount++;
+            }
+        }
+        Console.WriteLine(appleCount);
+        Console.WriteLine(orangeCount);
     }
 
-    string oranges_temp_temp;
-    getline(cin, oranges_temp_temp);
+}
 
-    vector<string> oranges_temp = split(rtrim(oranges_temp_temp));
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
 
-    vector<int> oranges(n);
+        int s = Convert.ToInt32(firstMultipleInput[0]);
 
-    for (int i = 0; i < n; i++) {
-        int oranges_item = stoi(oranges_temp[i]);
+        int t = Convert.ToInt32(firstMultipleInput[1]);
 
-        oranges[i] = oranges_item;
+        string[] secondMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int a = Convert.ToInt32(secondMultipleInput[0]);
+
+        int b = Convert.ToInt32(secondMultipleInput[1]);
+
+        string[] thirdMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int m = Convert.ToInt32(thirdMultipleInput[0]);
+
+        int n = Convert.ToInt32(thirdMultipleInput[1]);
+
+        List<int> apples = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(applesTemp => Convert.ToInt32(applesTemp)).ToList();
+
+        List<int> oranges = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(orangesTemp => Convert.ToInt32(orangesTemp)).ToList();
+
+        Result.countApplesAndOranges(s, t, a, b, apples, oranges);
     }
-
-    countApplesAndOranges(s, t, a, b, apples, oranges);
-
-    return 0;
-}
-
-string ltrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
-
-    return s;
-}
-
-string rtrim(const string &str) {
-    string s(str);
-
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
-
-    return s;
-}
-
-vector<string> split(const string &str) {
-    vector<string> tokens;
-
-    string::size_type start = 0;
-    string::size_type end = 0;
-
-    while ((end = str.find(" ", start)) != string::npos) {
-        tokens.push_back(str.substr(start, end - start));
-
-        start = end + 1;
-    }
-
-    tokens.push_back(str.substr(start));
-
-    return tokens;
 }
